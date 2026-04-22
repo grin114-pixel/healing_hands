@@ -1,0 +1,17 @@
+{
+  "name": "Healing Hands",
+  "short_name": "Healing Hands",
+  "description": "마사지·힐링 케어 기록 앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fef4f0",
+  "theme_color": "#c97a58",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
