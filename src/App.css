@@ -476,6 +476,10 @@
   justify-content: center;
 }
 
+.modal-overlay--center {
+  align-items: center;
+}
+
 @media (min-width: 520px) {
   .modal-overlay {
     align-items: center;
@@ -553,6 +557,22 @@
 .modal-close-button svg {
   width: 14px;
   height: 14px;
+}
+
+.modal-sheet--confirm {
+  padding-bottom: 22px;
+}
+
+.confirm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 /* ─── Record Form (used inside modal) ─── */
@@ -688,7 +708,7 @@
 .record-body {
   padding: 16px 18px;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 14px;
   font-size: 90%;
 }
@@ -700,7 +720,23 @@
 .record-col--meta {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
+  align-items: center;
+}
+
+.record-col--meta .record-field {
+  justify-content: center;
+}
+
+.record-col--meta .record-field-label,
+.record-col--meta .record-field-value {
+  text-align: center;
+}
+
+.record-col--meta .record-divider {
+  width: min(100%, 220px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .record-col--content {
@@ -730,6 +766,15 @@
   align-items: baseline;
   gap: 10px;
   min-width: 0;
+}
+
+.record-field--center {
+  justify-content: center;
+}
+
+.record-field--center .record-field-value {
+  text-align: center;
+  width: 100%;
 }
 
 .record-field-label {
@@ -762,7 +807,7 @@
 .record-divider {
   border: none;
   border-top: 1px solid rgba(201, 122, 88, 0.10);
-  margin: 2px 0;
+  margin: 0;
 }
 
 /* ─── Memo column ─── */

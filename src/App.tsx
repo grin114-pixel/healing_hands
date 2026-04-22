@@ -175,6 +175,7 @@ export default function App() {
   })
   const [isEditSaving, setIsEditSaving] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null)
 
   // ── Expand memo ──
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
@@ -437,8 +438,18 @@ export default function App() {
     }
   }
 
-  async function deleteRecord(id: string) {
-    if (!window.confirm('이 기록을 삭제할까요?')) return
+  function requestDeleteRecord(id: string) {
+    setPendingDeleteId(id)
+  }
+
+  function cancelDelete() {
+    setPendingDeleteId(null)
+  }
+
+  async function confirmDelete() {
+    if (!pendingDeleteId) return
+    const id = pendingDeleteId
+    setPendingDeleteId(null)
     setDeletingId(id)
     try {
       if (isSupabaseConfigured()) {
@@ -647,7 +658,7 @@ export default function App() {
                   isExpanded={expandedIds.has(record.id)}
                   onToggleExpand={() => toggleExpand(record.id)}
                   onEdit={() => startEdit(record)}
-                  onDelete={() => void deleteRecord(record.id)}
+                  onDelete={() => requestDeleteRecord(record.id)}
                   isDeleting={deletingId === record.id}
                 />
               ),
@@ -762,6 +773,33 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Delete confirm modal */}
+      {pendingDeleteId && (
+        <div
+          className="modal-overlay modal-overlay--center"
+          onClick={(e) => { if (e.target === e.currentTarget) cancelDelete() }}
+        >
+          <div className="modal-sheet modal-sheet--confirm">
+            <div className="modal-header">
+              <p className="modal-title">삭제할까요?</p>
+              <button type="button" className="modal-close-button" onClick={cancelDelete} aria-label="닫기">
+                <XIcon />
+              </button>
+            </div>
+            <div className="confirm-body">
+              <div className="confirm-actions">
+                <button type="button" className="secondary-button" onClick={cancelDelete}>
+                  취소
+                </button>
+                <button type="button" className="primary-button" onClick={() => void confirmDelete()}>
+                  삭제
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -821,7 +859,7 @@ function RecordCard({
           {/* 1열 */}
           <div className="record-col record-col--meta">
             {(record.therapist || record.course) && (
-              <div className="record-field">
+              <div className="record-field record-field--center">
                 <span className="record-field-value">
                   {record.course}
                   {record.course && record.therapist && (
