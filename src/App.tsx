@@ -858,15 +858,14 @@ function RecordCard({
         <div className="record-body">
           {/* 1열 */}
           <div className="record-col record-col--meta">
-            {(record.therapist || record.course) && (
+            {record.course && (
               <div className="record-field record-field--center">
-                <span className="record-field-value">
-                  {record.course}
-                  {record.course && record.therapist && (
-                    <span className="record-field-value--paren"> ({record.therapist})</span>
-                  )}
-                  {!record.course && record.therapist && record.therapist}
-                </span>
+                <span className="record-field-value">{record.course}</span>
+              </div>
+            )}
+            {record.therapist && (
+              <div className="record-field record-field--center">
+                <span className="record-field-value record-field-value--paren">({record.therapist})</span>
               </div>
             )}
             {(record.amount || record.balance) && <hr className="record-divider" />}
