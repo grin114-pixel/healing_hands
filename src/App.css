@@ -744,14 +744,6 @@
   padding-left: 14px;
 }
 
-.record-col--content-empty {
-  display: none;
-}
-
-.record-body:has(.record-col--content-empty) .record-col--meta {
-  grid-column: 1 / -1;
-}
-
 /* ─── Record Field Rows ─── */
 
 .record-row {

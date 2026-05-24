@@ -884,7 +884,7 @@ function RecordCard({
           </div>
 
           {/* 2열: 메모 */}
-          <div className={`record-col record-col--content${hasMemo ? '' : ' record-col--content-empty'}`}>
+          <div className="record-col record-col--content">
             {hasMemo && (
               <div className="record-memo-wrap">
                 <p className={`record-memo${memoNeedsClamp && !isExpanded ? ' record-memo--clamped' : ''}`}>
